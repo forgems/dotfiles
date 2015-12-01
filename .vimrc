@@ -82,7 +82,7 @@ map <D-7> 7gt
 map <D-1> 1gt
 map <D-1> 1gt
 "colorscheme wombat256
-colorscheme summerfruit256
+colorscheme molokai_dark
 highlight NonText ctermfg=238
 highlight SpecialKey ctermfg=238
 "set autochdir

@@ -58,20 +58,10 @@ set statusline=[%l,%c\ %P%M]\ %f\ %r%h%w
 set listchars=tab:.\ 
 " set listchars=tab:▸\ ,eol:¬
 set list
+au BufRead,BufNewFile * set noet
 autocmd BufRead,BufNewFile,BufEnter *.py,*.pyw set et
-autocmd BufRead,BufNewFile,BufEnter *.html set noet
 autocmd BufRead,BufNewFile,BufEnter *.html vmap gB d<ESC>i{% blocktrans %}<ESC>pa{% endblocktrans %}<ESC>
-autocmd BufRead,BufNewFile,BufEnter *.rb set sw=2
-autocmd BufRead,BufNewFile,BufEnter *.rb set ts=2
 let python_highligh_all=1
-au BufRead,BufNewFile *.c,*.h set noexpandtab
-au BufRead,BufNewFile Makefile* set noexpandtab
-highlight BadWhitespace ctermbg=red guibg=red
-" Display tabs at the beginning of a line in Python mode as bad.
-au BufRead,BufNewFile *.py,*.pyw match BadWhitespace /^\t\+/
-" Make trailing whitespace be flagged as bad.
-au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
-" au BufRead,BufNewFile *.py,*.pyw,*.c,*.h set textwidth=120
 map <D-1> 1gt
 map <D-2> 2gt
 map <D-3> 3gt
@@ -85,5 +75,11 @@ map <D-1> 1gt
 colorscheme molokai_dark
 highlight NonText ctermfg=238
 highlight SpecialKey ctermfg=238
+highlight BadWhitespace ctermbg=red guibg=red
+" Display tabs at the beginning of a line in Python mode as bad.
+au BufRead,BufNewFile *.py,*.pyw match BadWhitespace /^\t\+/
+" Make trailing whitespace be flagged as bad.
+au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
+" au BufRead,BufNewFile *.py,*.pyw,*.c,*.h set textwidth=120
 "set autochdir
 execute pathogen#infect()

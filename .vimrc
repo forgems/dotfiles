@@ -83,3 +83,4 @@ au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 " au BufRead,BufNewFile *.py,*.pyw,*.c,*.h set textwidth=120
 "set autochdir
 execute pathogen#infect()
+set runtimepath^=~/.vim/bundle/ctrlp.vim

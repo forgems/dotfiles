@@ -48,7 +48,7 @@ nmap <D-S-Right> :tabnext<cr>i
 nmap <M-t> :tabnew<cr>
 imap <M-t> <ESC>:tabnew<cr>
 set diffopt =filler,vertical,context:4
-iab hdr #!/usr/bin/env python<CR># -*- coding: utf-8 -*-
+iab hdr # coding=UTF8
 set smarttab
 set wildmode=full
 set wildmenu
@@ -84,3 +84,4 @@ au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 "set autochdir
 execute pathogen#infect()
 set runtimepath^=~/.vim/bundle/ctrlp.vim
+set colorcolumn=80

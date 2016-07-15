@@ -62,6 +62,7 @@ set listchars=tab:.\
 set list
 au BufRead,BufNewFile * set noet
 autocmd BufRead,BufNewFile,BufEnter *.py,*.pyw set et
+autocmd BufWritePost *.py class Flake8()
 autocmd BufRead,BufNewFile,BufEnter *.html vmap gB d<ESC>i{% blocktrans %}<ESC>pa{% endblocktrans %}<ESC>
 let python_highligh_all=1
 map <D-1> 1gt

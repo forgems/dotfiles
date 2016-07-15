@@ -16,6 +16,8 @@ set guioptions=aegimrLt
 set ai
 set expandtab
 set tabstop=4
+set cindent
+set autoindent
 set shiftwidth=4
 set bs=2
 set cursorline
@@ -48,7 +50,7 @@ nmap <D-S-Right> :tabnext<cr>i
 nmap <M-t> :tabnew<cr>
 imap <M-t> <ESC>:tabnew<cr>
 set diffopt =filler,vertical,context:4
-iab hdr # coding=UTF8
+iab pyhdr #!/usr/bin/env python<CR># -*- coding: utf-8 -*-<CR>
 set smarttab
 set wildmode=full
 set wildmenu

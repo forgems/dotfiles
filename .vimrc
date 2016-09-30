@@ -59,7 +59,7 @@ set cmdheight=2
 set statusline=[%l,%c\ %P%M]\ %f\ %r%h%w
 set listchars=tab:.\ 
 " set listchars=tab:▸\ ,eol:¬
-set list
+set nolist
 au BufRead,BufNewFile * set noet
 autocmd BufRead,BufNewFile,BufEnter *.py,*.pyw set et
 autocmd BufWritePost *.py call Flake8()
@@ -79,11 +79,12 @@ colorscheme molokai_dark
 highlight NonText ctermfg=238
 highlight SpecialKey ctermfg=238
 highlight BadWhitespace ctermbg=red guibg=red
-" Display tabs at the beginning of a line in Python mode as bad.
-au BufRead,BufNewFile *.py,*.pyw match BadWhitespace /^\t\+/
 " Make trailing whitespace be flagged as bad.
-au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
-" au BufRead,BufNewFile *.py,*.pyw,*.c,*.h set textwidth=120
+match BadWhitespace /\s\+$/
+" Display tabs at the beginning of a line in Python mode as bad.
+au BufRead,BufNewFile,BufEnter *.py,*.pyw match BadWhitespace /^\t\+/
+au BufRead,BufNewFile,BufEnter * match BadWhitespace //
+au BufRead,BufNewFile,BufEnter *.c,*.h set noet ts=8 sw=8
 "set autochdir
 execute pathogen#infect()
 set runtimepath^=~/.vim/bundle/ctrlp.vim

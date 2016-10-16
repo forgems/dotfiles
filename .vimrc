@@ -55,7 +55,7 @@ set smarttab
 set wildmode=full
 set wildmenu
 set showmatch matchtime=3
-set cmdheight=2
+set cmdheight=1
 set statusline=[%l,%c\ %P%M]\ %f\ %r%h%w
 set listchars=tab:.\ 
 " set listchars=tab:▸\ ,eol:¬
@@ -75,17 +75,19 @@ map <D-7> 7gt
 map <D-1> 1gt
 map <D-1> 1gt
 "colorscheme wombat256
+execute pathogen#infect()
+set runtimepath^=~/.vim/bundle/ctrlp.vim
 colorscheme molokai_dark
 highlight NonText ctermfg=238
 highlight SpecialKey ctermfg=238
 highlight BadWhitespace ctermbg=red guibg=red
-" Make trailing whitespace be flagged as bad.
-match BadWhitespace /\s\+$/
+highlight TrailingWhitespace ctermbg=red guibg=red
 " Display tabs at the beginning of a line in Python mode as bad.
 au BufRead,BufNewFile,BufEnter *.py,*.pyw match BadWhitespace /^\t\+/
 au BufRead,BufNewFile,BufEnter * match BadWhitespace //
 au BufRead,BufNewFile,BufEnter *.c,*.h set noet ts=8 sw=8
 "set autochdir
-execute pathogen#infect()
-set runtimepath^=~/.vim/bundle/ctrlp.vim
 set colorcolumn=80
+" Make trailing whitespace be flagged as bad.
+match TrailingWhitespace /\s\+$/
+au Syntax * syn match TrailingWhitespace /\s\+$\| \+\ze\t/

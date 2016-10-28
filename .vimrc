@@ -33,22 +33,8 @@ imap <F3> <ESC>:NERDTreeToggle<CR>
 map <F4> :NERDTreeFind<CR>
 imap <F4> <ESC>:NERDTreeFind<CR>
 filetype plugin on
-nmap <C-S-tab> :tabprevious<cr>
-nmap <C-tab> :tabnext<cr>
-map <C-S-tab> :tabprevious<cr>
-map <C-tab> :tabnext<cr>
-imap <C-S-tab> <ESC>:tabprevious<cr>i
-imap <C-tab> <ESC>:tabnext<cr>i
-imap <M-S-Left> <ESC>:tabprevious<cr>i
-imap <M-S-Right> <ESC>:tabnext<cr>i
-nmap <M-S-Left> :tabprevious<cr>i
-nmap <M-S-Right> :tabnext<cr>i
-imap <D-S-Left> <ESC>:tabprevious<cr>i
-imap <D-S-Right> <ESC>:tabnext<cr>i
-nmap <D-S-Left> :tabprevious<cr>i
-nmap <D-S-Right> :tabnext<cr>i
-nmap <M-t> :tabnew<cr>
-imap <M-t> <ESC>:tabnew<cr>
+nmap <tab> :bn<cr>
+nmap <s-tab> :bp<cr>
 set diffopt =filler,vertical,context:4
 iab pyhdr #!/usr/bin/env python<CR># -*- coding: utf-8 -*-<CR>
 set smarttab
@@ -83,11 +69,30 @@ highlight SpecialKey ctermfg=238
 highlight BadWhitespace ctermbg=red guibg=red
 highlight TrailingWhitespace ctermbg=red guibg=red
 " Display tabs at the beginning of a line in Python mode as bad.
-au BufRead,BufNewFile,BufEnter *.py,*.pyw match BadWhitespace /^\t\+/
+au BufRead,BufNewFile,BufEnter *.js,*.css,*.py,*.pyw match BadWhitespace /^\t\+/
 au BufRead,BufNewFile,BufEnter * match BadWhitespace //
 au BufRead,BufNewFile,BufEnter *.c,*.h set noet ts=8 sw=8
+au BufRead,BufNewFile,BufEnter *.css,*.js set et ts=2 sw=2
 "set autochdir
 set colorcolumn=80
 " Make trailing whitespace be flagged as bad.
 match TrailingWhitespace /\s\+$/
 au Syntax * syn match TrailingWhitespace /\s\+$\| \+\ze\t/
+set hidden
+
+" To open a new empty buffer
+" This replaces :tabnew which I used to bind to this mapping
+nmap <leader>T :enew<cr>
+
+" Move to the next buffer
+nmap <leader>l :bnext<CR>
+
+" Move to the previous buffer
+nmap <leader>h :bprevious<CR>
+
+" Close the current buffer and move to the previous one
+" This replicates the idea of closing a tab
+nmap <leader>bq :bp <BAR> bd #<CR>
+
+" Show all open buffers and their status
+nmap <leader>bl :ls<CR>

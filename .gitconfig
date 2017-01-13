@@ -6,3 +6,10 @@
 	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
 	type = cat-file -t
 	dump = cat-file -p
+[user]
+	email = marcinswiderski@opentopic.com
+	name = Marcin Swiderski
+[push]
+	default = simple
+[commit]
+	template = /home/forgems/.gitmessage.txt

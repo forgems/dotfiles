@@ -11,7 +11,7 @@ if has("gui_running")
     set guifont=Droid\ Sans\ Mono\ Slashed\ 10
 "    set nomacatsui
     set antialias
-endif 
+endif
 set guioptions=aegimrLt
 set ai
 set expandtab
@@ -61,7 +61,6 @@ map <D-7> 7gt
 map <D-1> 1gt
 map <D-1> 1gt
 "colorscheme wombat256
-execute pathogen#infect()
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 colorscheme molokai_dark
 highlight NonText ctermfg=238
@@ -96,3 +95,5 @@ nmap <leader>bq :bp <BAR> bd #<CR>
 
 " Show all open buffers and their status
 nmap <leader>bl :ls<CR>
+let g:sparkupNextMapping="<c-k>"
+execute pathogen#infect()

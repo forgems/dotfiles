@@ -12,4 +12,6 @@
 [push]
 	default = simple
 [commit]
-	template = /home/forgems/.gitmessage.txt
+	template = ~/.gitmessage
+[pull]
+	rebase = true

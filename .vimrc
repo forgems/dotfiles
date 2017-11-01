@@ -1,3 +1,4 @@
+execute pathogen#infect()
 set nocp
 set t_Co=256
 filetype on
@@ -14,8 +15,11 @@ if has("gui_running")
 endif
 set guioptions=aegimrLt
 set ai
+
 set expandtab
 set tabstop=4
+set smarttab
+
 set cindent
 set autoindent
 set shiftwidth=4
@@ -37,7 +41,6 @@ nmap <tab> :bn<cr>
 nmap <s-tab> :bp<cr>
 set diffopt =filler,vertical,context:4
 iab pyhdr #!/usr/bin/env python<CR># -*- coding: utf-8 -*-<CR>
-set smarttab
 set wildmode=full
 set wildmenu
 set showmatch matchtime=3
@@ -47,7 +50,7 @@ set listchars=tab:.\
 " set listchars=tab:▸\ ,eol:¬
 set nolist
 au BufRead,BufNewFile * set noet
-autocmd BufRead,BufNewFile,BufEnter *.py,*.pyw set et
+autocmd BufRead,BufNewFile,BufEnter *.py,*.pyw,*.yml set et
 autocmd BufWritePost *.py call Flake8()
 autocmd BufRead,BufNewFile,BufEnter *.html vmap gB d<ESC>i{% blocktrans %}<ESC>pa{% endblocktrans %}<ESC>
 let python_highligh_all=1
@@ -61,7 +64,7 @@ map <D-7> 7gt
 map <D-1> 1gt
 map <D-1> 1gt
 "colorscheme wombat256
-set runtimepath^=~/.vim/bundle/ctrlp.vim
+"let g:rehash256=1
 colorscheme molokai_dark
 highlight NonText ctermfg=238
 highlight SpecialKey ctermfg=238
@@ -77,6 +80,8 @@ set colorcolumn=80
 " Make trailing whitespace be flagged as bad.
 match TrailingWhitespace /\s\+$/
 au Syntax * syn match TrailingWhitespace /\s\+$\| \+\ze\t/
+au BufRead,BufNew,BufEnter * match TrailingWhitespace /\s\+$\| \+\ze\t/
+au ColorScheme * highlight default TrailingWhitespace ctermbg=red guibg=red
 set hidden
 
 " To open a new empty buffer
@@ -96,4 +101,19 @@ nmap <leader>bq :bp <BAR> bd #<CR>
 " Show all open buffers and their status
 nmap <leader>bl :ls<CR>
 let g:sparkupNextMapping="<c-k>"
-execute pathogen#infect()
+set rtp+=~/.fzf
+vnoremap < <gv
+vnoremap > >gv
+set nobackup
+set noswapfile
+set nowritebackup
+set clipboard=unnamed
+
+command! -bang -nargs=* Rg
+      \ call fzf#vim#grep(
+      \   'rg --column --line-number --no-heading --color=always --ignore-case '.shellescape(<q-args>), 1,
+      \   <bang>0 ? fzf#vim#with_preview('up:60%')
+      \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+      \   <bang>0)
+
+nnoremap <C-p>a :Rg

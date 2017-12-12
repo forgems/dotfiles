@@ -50,7 +50,7 @@ set listchars=tab:.\
 " set listchars=tab:▸\ ,eol:¬
 set nolist
 au BufRead,BufNewFile * set noet
-autocmd BufRead,BufNewFile,BufEnter *.py,*.pyw,*.yml set et
+autocmd BufRead,BufNewFile,BufEnter *.py,*.pyw,*.yml,*.yaml set et
 autocmd BufWritePost *.py call Flake8()
 autocmd BufRead,BufNewFile,BufEnter *.html vmap gB d<ESC>i{% blocktrans %}<ESC>pa{% endblocktrans %}<ESC>
 let python_highligh_all=1
@@ -71,7 +71,7 @@ highlight SpecialKey ctermfg=238
 highlight BadWhitespace ctermbg=red guibg=red
 highlight TrailingWhitespace ctermbg=red guibg=red
 " Display tabs at the beginning of a line in Python mode as bad.
-au BufRead,BufNewFile,BufEnter *.js,*.css,*.py,*.pyw match BadWhitespace /^\t\+/
+au BufRead,BufNewFile,BufEnter *.js,*.css,*.py,*.pyw,*.yaml,*.yml match BadWhitespace /^\t\+/
 au BufRead,BufNewFile,BufEnter * match BadWhitespace //
 au BufRead,BufNewFile,BufEnter *.c,*.h set noet ts=8 sw=8
 au BufRead,BufNewFile,BufEnter *.css,*.js set et ts=2 sw=2
@@ -82,6 +82,7 @@ match TrailingWhitespace /\s\+$/
 au Syntax * syn match TrailingWhitespace /\s\+$\| \+\ze\t/
 au BufRead,BufNew,BufEnter * match TrailingWhitespace /\s\+$\| \+\ze\t/
 au ColorScheme * highlight default TrailingWhitespace ctermbg=red guibg=red
+au ColorScheme * highlight default BadWhitespace ctermbg=red guibg=red
 set hidden
 
 " To open a new empty buffer
@@ -116,4 +117,15 @@ command! -bang -nargs=* Rg
       \           : fzf#vim#with_preview('right:50%:hidden', '?'),
       \   <bang>0)
 
-nnoremap <C-p>a :Rg
+nnoremap <C-p>a :Rg <cword><CR>
+if executable('ag')
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+endif
+nnoremap <leader>a :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>

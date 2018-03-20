@@ -1,4 +1,46 @@
-execute pathogen#infect()
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" " alternatively, pass a path where Vundle should install plugins
+" "call vundle#begin('~/some/path/here')
+"
+" " let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+"
+" " The following are examples of different formats supported.
+" " Keep Plugin commands between vundle#begin/end.
+" " plugin on GitHub repo
+Plugin 'tpope/vim-fugitive'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'fatih/vim-go'
+Plugin 'nvie/vim-flake8'
+Plugin 'http://github.com/jeetsukumaran/vim-buffergator'
+Plugin 'https://github.com/junegunn/fzf.vim'
+Plugin 'https://github.com/vim-airline/vim-airline'
+Plugin 'https://github.com/leafgarland/typescript-vim.git'
+Plugin 'https://github.com/rust-lang/rust.vim.git'
+Plugin 'posva/vim-vue'
+
+" " plugin from http://vim-scripts.org/vim/scripts.html
+" " Plugin 'L9'
+" " Git plugin not hosted on GitHub
+" Plugin 'git://git.wincent.com/command-t.git'
+" " git repos on your local machine (i.e. when working on your own plugin)
+" Plugin 'file:///home/gmarik/path/to/plugin'
+" " The sparkup vim script is in a subdirectory of this repo called vim.
+" " Pass the path to set the runtimepath properly.
+" Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+" " Install L9 and avoid a Naming conflict if you've already installed a
+" " different version somewhere else.
+" " Plugin 'ascenator/L9', {'name': 'newL9'}
+"
+" " All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on
 set nocp
 set t_Co=256
 filetype on
@@ -129,3 +171,5 @@ if executable('ag')
   let g:ctrlp_use_caching = 0
 endif
 nnoremap <leader>a :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+match ErrorMsg '\s\+$'
+nnoremap gd :YcmCompleter GoToDefinitionElseDeclaration<CR>

@@ -7,3 +7,4 @@ ln -f -s "${DIR}/.tmux.conf" "${HOME}/.tmux.conf"
 cd $HOME
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install
+vim +PluginInstall +qall

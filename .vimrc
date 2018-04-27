@@ -24,6 +24,8 @@ Plugin 'https://github.com/vim-airline/vim-airline'
 Plugin 'https://github.com/leafgarland/typescript-vim.git'
 Plugin 'https://github.com/rust-lang/rust.vim.git'
 Plugin 'posva/vim-vue'
+Plugin 'fisadev/vim-isort'
+
 
 " " plugin from http://vim-scripts.org/vim/scripts.html
 " " Plugin 'L9'
@@ -116,7 +118,7 @@ highlight TrailingWhitespace ctermbg=red guibg=red
 au BufRead,BufNewFile,BufEnter *.js,*.css,*.py,*.pyw,*.yaml,*.yml match BadWhitespace /^\t\+/
 au BufRead,BufNewFile,BufEnter * match BadWhitespace //
 au BufRead,BufNewFile,BufEnter *.c,*.h set noet ts=8 sw=8
-au BufRead,BufNewFile,BufEnter *.css,*.js set et ts=2 sw=2
+au BufRead,BufNewFile,BufEnter *.html,*.css,*.js set et ts=2 sw=2
 "set autochdir
 set colorcolumn=80
 " Make trailing whitespace be flagged as bad.

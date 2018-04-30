@@ -17,7 +17,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'fatih/vim-go'
-Plugin 'nvie/vim-flake8'
+Plugin 'https://github.com/alfredodeza/khuno.vim'
 Plugin 'http://github.com/jeetsukumaran/vim-buffergator'
 Plugin 'https://github.com/junegunn/fzf.vim'
 Plugin 'https://github.com/vim-airline/vim-airline'
@@ -95,7 +95,6 @@ set listchars=tab:.\
 set nolist
 au BufRead,BufNewFile * set noet
 autocmd BufRead,BufNewFile,BufEnter *.py,*.pyw,*.yml,*.yaml set et
-autocmd BufWritePost *.py call Flake8()
 autocmd BufRead,BufNewFile,BufEnter *.html vmap gB d<ESC>i{% blocktrans %}<ESC>pa{% endblocktrans %}<ESC>
 let python_highligh_all=1
 map <D-1> 1gt
@@ -173,5 +172,6 @@ if executable('ag')
   let g:ctrlp_use_caching = 0
 endif
 nnoremap <leader>a :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+nnoremap <leader>x <ESC>:Khuno show<CR>
 match ErrorMsg '\s\+$'
 nnoremap gd :YcmCompleter GoToDefinitionElseDeclaration<CR>

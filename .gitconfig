@@ -12,7 +12,7 @@
 [push]
 	default = simple
 [commit]
-	template = ~/.gitmessage
+	#template = ~/.gitmessage
 [pull]
 	rebase = true
 [filter "lfs"]

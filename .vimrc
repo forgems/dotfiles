@@ -25,6 +25,7 @@ Plugin 'https://github.com/leafgarland/typescript-vim.git'
 Plugin 'https://github.com/rust-lang/rust.vim.git'
 Plugin 'posva/vim-vue'
 Plugin 'fisadev/vim-isort'
+Plugin 'joshdick/onedark.vim'
 
 
 " " plugin from http://vim-scripts.org/vim/scripts.html
@@ -49,24 +50,15 @@ filetype on
 filetype indent on
 filetype plugin on
 syntax on
-if has("gui_running")
-    set guioptions=aegimrLt
-    let &guicursor = &guicursor . ",a:blinkon0"
-    set guifont=Monaco:h12
-    set guifont=Droid\ Sans\ Mono\ Slashed\ 10
-"    set nomacatsui
-    set antialias
-endif
-set guioptions=aegimrLt
-set ai
 
 set expandtab
-set tabstop=4
-set smarttab
+set smarttab "insert tabs on the start of a line according to sw not ts
+set smartcase "ignore case if search pattern is all lowercase,
 
 set cindent
 set autoindent
 set shiftwidth=4
+set tabstop=4
 set bs=2
 set cursorline
 set ruler
@@ -175,3 +167,21 @@ nnoremap <leader>a :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 nnoremap <leader>x <ESC>:Khuno show<CR>
 match ErrorMsg '\s\+$'
 nnoremap gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+set mouse=a
+set ttymouse=sgr
+" for tmux support
+" apt install ncurses-term
+
+if &term =~ '256color'
+	" disable Background Color Erase (BCE) so that color schemes
+	"     " render properly when inside 256-color tmux and GNU screen.
+	"         " see also
+	"         http://snk.tuxfamily.org/log/vim-256color-bce.html
+	let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+	let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+	set t_ut=
+endif
+
+if (has('termguicolors'))
+	set termguicolors
+endif

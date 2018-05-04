@@ -100,7 +100,7 @@ map <D-1> 1gt
 map <D-1> 1gt
 "colorscheme wombat256
 "let g:rehash256=1
-colorscheme molokai_dark
+colorscheme molokai
 highlight NonText ctermfg=238
 highlight SpecialKey ctermfg=238
 highlight BadWhitespace ctermbg=red guibg=red

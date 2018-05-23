@@ -25,7 +25,10 @@ Plugin 'https://github.com/rust-lang/rust.vim.git'
 Plugin 'posva/vim-vue'
 Plugin 'fisadev/vim-isort'
 Plugin 'joshdick/onedark.vim'
-
+Plugin 'https://github.com/Heorhiy/VisualStudioDark.vim'
+Plugin 'https://github.com/hzchirs/vim-material'
+Plugin 'https://github.com/dracula/vim.git'
+Plugin 'KabbAmine/yowish.vim'
 
 " " plugin from http://vim-scripts.org/vim/scripts.html
 " " Plugin 'L9'
@@ -43,50 +46,53 @@ Plugin 'joshdick/onedark.vim'
 " " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on
-set nocp
-set t_Co=256
-filetype on
+
+
+" set listchars=tab:▸\ ,eol:¬
 filetype indent on
+filetype on
 filetype plugin on
+iab pyhdr #!/usr/bin/env python<CR># -*- coding: utf-8 -*-<CR>
+set autoindent
+set bs=2
+set cindent
+set cmdheight=1
+set cursorline
+set diffopt =filler,vertical,context:4
+set expandtab
+set incsearch
+set lbr
+set listchars=tab:.\ 
+set nocp
+set nolist
+set ruler
+set shiftwidth=4
+set showmatch matchtime=3
+set smartcase "ignore case if search pattern is all lowercase,
+set smarttab "insert tabs on the start of a line according to sw not ts
+set statusline=[%l,%c\ %P%M]\ %f\ %r%h%w
+set t_Co=256
+set tabstop=4
+set textwidth=0
+set wildmenu
+set wildmode=full
+set wrap
 syntax on
 
-set expandtab
-set smarttab "insert tabs on the start of a line according to sw not ts
-set smartcase "ignore case if search pattern is all lowercase,
-
-set cindent
-set autoindent
-set shiftwidth=4
-set tabstop=4
-set bs=2
-set cursorline
-set ruler
-set incsearch
-set wrap
-set lbr
-set textwidth=0
-filetype plugin on
-set diffopt =filler,vertical,context:4
-iab pyhdr #!/usr/bin/env python<CR># -*- coding: utf-8 -*-<CR>
-set wildmode=full
-set wildmenu
-set showmatch matchtime=3
-set cmdheight=1
-set statusline=[%l,%c\ %P%M]\ %f\ %r%h%w
-set listchars=tab:.\ 
-" set listchars=tab:▸\ ,eol:¬
-set nolist
 au BufRead,BufNewFile * set noet
 autocmd BufRead,BufNewFile,BufEnter *.py,*.pyw,*.yml,*.yaml set et
 autocmd BufRead,BufNewFile,BufEnter *.html vmap gB d<ESC>i{% blocktrans %}<ESC>pa{% endblocktrans %}<ESC>
 let python_highligh_all=1
 "colorscheme wombat256
 "let g:rehash256=1
-colorscheme molokai
+set background=dark
+colorscheme dracula
+
 highlight NonText ctermfg=238
 highlight SpecialKey ctermfg=238
-highlight BadWhitespace ctermbg=red guibg=red
+highlight BadWhitespace ctermbg=red guibg=red guibg=#880000
 highlight TrailingWhitespace ctermbg=red guibg=red
+highlight SpellBad guibg=#660000
 " Display tabs at the beginning of a line in Python mode as bad.
 au BufRead,BufNewFile,BufEnter *.js,*.css,*.py,*.pyw,*.yaml,*.yml match BadWhitespace /^\t\+/
 au BufRead,BufNewFile,BufEnter * match BadWhitespace //
@@ -130,10 +136,15 @@ if &term =~ '256color'
 	let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 	set t_ut=
 endif
+let &t_8u = "\<Esc>[58;2;%lu;%lu;%lum"
+let &t_Cs = "\e[4:3m"
+let &t_Ce = "\e[4:0m"
 
 if (has('termguicolors'))
   set termguicolors
 endif
+
+let g:fzf_layout = { 'up': '~30%' }
 
 " KEYBINDINGS
 imap <F3> <ESC>:NERDTreeToggle<CR>

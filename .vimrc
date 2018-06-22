@@ -29,6 +29,9 @@ Plugin 'https://github.com/Heorhiy/VisualStudioDark.vim'
 Plugin 'https://github.com/hzchirs/vim-material'
 Plugin 'https://github.com/dracula/vim.git'
 Plugin 'KabbAmine/yowish.vim'
+Plugin 'https://github.com/rakr/vim-one'
+Plugin 'https://github.com/rakr/vim-colors-rakr'
+Plugin 'jacoborus/tender.vim'
 
 " " plugin from http://vim-scripts.org/vim/scripts.html
 " " Plugin 'L9'

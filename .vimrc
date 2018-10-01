@@ -32,6 +32,8 @@ Plugin 'KabbAmine/yowish.vim'
 Plugin 'https://github.com/rakr/vim-one'
 Plugin 'https://github.com/rakr/vim-colors-rakr'
 Plugin 'jacoborus/tender.vim'
+Plugin 'https://github.com/morhetz/gruvbox'
+Plugin 'crusoexia/vim-monokai'
 
 " " plugin from http://vim-scripts.org/vim/scripts.html
 " " Plugin 'L9'
@@ -89,7 +91,8 @@ let python_highligh_all=1
 "colorscheme wombat256
 "let g:rehash256=1
 set background=dark
-colorscheme dracula
+"colorscheme dracula
+colorscheme molokai
 
 highlight NonText ctermfg=238
 highlight SpecialKey ctermfg=238

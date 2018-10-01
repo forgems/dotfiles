@@ -7,7 +7,7 @@
 	type = cat-file -t
 	dump = cat-file -p
 [user]
-	email = marcinswiderski@opentopic.com
+	email = marcin.swiderski@gmail.com
 	name = Marcin Swiderski
 [push]
 	default = simple

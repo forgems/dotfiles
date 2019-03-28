@@ -14,8 +14,8 @@ Plugin 'VundleVim/Vundle.vim'
 " " Keep Plugin commands between vundle#begin/end.
 " " plugin on GitHub repo
 Plugin 'tpope/vim-fugitive'
-Plugin 'Valloric/YouCompleteMe'
 Plugin 'fatih/vim-go'
+Plugin 'Valloric/YouCompleteMe'
 Plugin 'https://github.com/alfredodeza/khuno.vim'
 Plugin 'http://github.com/jeetsukumaran/vim-buffergator'
 Plugin 'https://github.com/junegunn/fzf.vim'
@@ -82,6 +82,7 @@ set textwidth=0
 set wildmenu
 set wildmode=full
 set wrap
+set completeopt=menuone
 syntax on
 
 au BufRead,BufNewFile * set noet
@@ -90,22 +91,24 @@ autocmd BufRead,BufNewFile,BufEnter *.html vmap gB d<ESC>i{% blocktrans %}<ESC>p
 let python_highligh_all=1
 "colorscheme wombat256
 "let g:rehash256=1
-set background=dark
+set background=light
 "colorscheme dracula
-colorscheme molokai
+"colorscheme molokai_dark
+"colorscheme fruit
+colorscheme summerfruit256
 
 highlight NonText ctermfg=238
 highlight SpecialKey ctermfg=238
-highlight BadWhitespace ctermbg=red guibg=red guibg=#880000
+highlight BadWhitespace ctermbg=red guibg=red guibg=#ff8888
 highlight TrailingWhitespace ctermbg=red guibg=red
-highlight SpellBad guibg=#660000
+highlight SpellBad guibg=#ff8888
 " Display tabs at the beginning of a line in Python mode as bad.
 au BufRead,BufNewFile,BufEnter *.js,*.css,*.py,*.pyw,*.yaml,*.yml match BadWhitespace /^\t\+/
 au BufRead,BufNewFile,BufEnter * match BadWhitespace //
 au BufRead,BufNewFile,BufEnter *.c,*.h set noet ts=8 sw=8
 au BufRead,BufNewFile,BufEnter *.html,*.css,*.js set et ts=2 sw=2
 "set autochdir
-set colorcolumn=80
+"set colorcolumn=80
 " Make trailing whitespace be flagged as bad.
 match TrailingWhitespace /\s\+$/
 au Syntax * syn match TrailingWhitespace /\s\+$\| \+\ze\t/
@@ -114,12 +117,16 @@ au ColorScheme * highlight default TrailingWhitespace ctermbg=red guibg=red
 au ColorScheme * highlight default BadWhitespace ctermbg=red guibg=red
 set hidden
 
-let g:sparkupNextMapping="<c-k>"
+let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck', 'misspell', 'vetshadow', 'gotype', 'megacheck', 'goconst', 'ineffassign', 'staticcheck', 'gocyclo', 'gosec']
+let g:go_list_type = "quickfix"
+let g:go_auto_type_info = 1
+let g:go_auto_sameids = 1
 set rtp+=~/.fzf
 set nobackup
 set noswapfile
 set nowritebackup
-set clipboard=unnamed
+set clipboard=unnamedplus
+set relativenumber
 
 command! -bang -nargs=* Rg
       \ call fzf#vim#grep(
@@ -131,6 +138,7 @@ command! -bang -nargs=* Rg
 match ErrorMsg '\s\+$'
 set mouse=a
 set ttymouse=sgr
+set ttyfast
 
 " for tmux truecolor support
 " apt install ncurses-term
@@ -151,6 +159,7 @@ if (has('termguicolors'))
 endif
 
 let g:fzf_layout = { 'up': '~30%' }
+let g:go_fmt_command = "goimports"
 
 " KEYBINDINGS
 imap <F3> <ESC>:NERDTreeToggle<CR>
@@ -159,7 +168,7 @@ map <Down> gj
 map <F3> :NERDTreeToggle<CR>
 map <F4> :NERDTreeFind<CR>
 map <Up> gk
-nnoremap gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+" nnoremap gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nnoremap <leader>a :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 nnoremap <leader>b <plug>(fzf-complete-file)
 nnoremap <leader>bq :bp <BAR> bd #<CR>
@@ -169,7 +178,23 @@ nnoremap <leader>l :bnext<CR>
 nnoremap <leader>r :Rg <cword><CR>
 nnoremap <leader>t :enew<CR>
 nnoremap <leader>x <ESC>:Khuno show<CR>
+autocmd FileType go nmap <Leader>i <Plug>(go-info)
 nnoremap <s-tab> :bp<cr>
 nnoremap <tab> :bn<cr>
 vnoremap < <gv
 vnoremap > >gv
+
+" go
+au FileType go setl tabstop=4
+au FileType go setl shiftwidth=4
+au FileType go setl textwidth=1000
+au FileType go setl number
+au FileType go setl nolist
+
+" yaml
+au FileType yaml setl indentkeys-=<:>
+au FileType yaml setl tabstop=2
+au FileType yaml setl shiftwidth=2
+au FileType yaml setl expandtab
+au FileType yaml setl number
+

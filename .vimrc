@@ -24,6 +24,8 @@ Plugin 'https://github.com/leafgarland/typescript-vim.git'
 Plugin 'https://github.com/rust-lang/rust.vim.git'
 Plugin 'posva/vim-vue'
 Plugin 'fisadev/vim-isort'
+Plugin 'https://github.com/marcelbeumer/spacedust.vim'
+
 Plugin 'joshdick/onedark.vim'
 Plugin 'https://github.com/Heorhiy/VisualStudioDark.vim'
 Plugin 'https://github.com/hzchirs/vim-material'
@@ -91,17 +93,15 @@ autocmd BufRead,BufNewFile,BufEnter *.html vmap gB d<ESC>i{% blocktrans %}<ESC>p
 let python_highligh_all=1
 "colorscheme wombat256
 "let g:rehash256=1
-set background=light
+set background=dark
 "colorscheme dracula
-"colorscheme molokai_dark
-"colorscheme fruit
-colorscheme summerfruit256
+colorscheme gruvbox
 
 highlight NonText ctermfg=238
 highlight SpecialKey ctermfg=238
 highlight BadWhitespace ctermbg=red guibg=red guibg=#ff8888
 highlight TrailingWhitespace ctermbg=red guibg=red
-highlight SpellBad guibg=#ff8888
+highlight SpellBad guibg=#aa0000
 " Display tabs at the beginning of a line in Python mode as bad.
 au BufRead,BufNewFile,BufEnter *.js,*.css,*.py,*.pyw,*.yaml,*.yml match BadWhitespace /^\t\+/
 au BufRead,BufNewFile,BufEnter * match BadWhitespace //
@@ -121,6 +121,7 @@ let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck', 'misspell', 'vetshad
 let g:go_list_type = "quickfix"
 let g:go_auto_type_info = 1
 let g:go_auto_sameids = 1
+let g:go_def_mode='gopls'
 set rtp+=~/.fzf
 set nobackup
 set noswapfile
@@ -157,7 +158,7 @@ let &t_Ce = "\e[4:0m"
 if (has('termguicolors'))
   set termguicolors
 endif
-
+let g:go_fmt_command = "goimports"
 let g:fzf_layout = { 'up': '~30%' }
 let g:go_fmt_command = "goimports"
 
@@ -175,7 +176,7 @@ nnoremap <leader>bq :bp <BAR> bd #<CR>
 nnoremap <leader>f :Files<CR>
 nnoremap <leader>h :bprevious<CR>
 nnoremap <leader>l :bnext<CR>
-nnoremap <leader>r :Rg <cword><CR>
+nnoremap <leader>r :Rg <C-R><C-W><CR>
 nnoremap <leader>t :enew<CR>
 nnoremap <leader>x <ESC>:Khuno show<CR>
 autocmd FileType go nmap <Leader>i <Plug>(go-info)
@@ -198,3 +199,5 @@ au FileType yaml setl shiftwidth=2
 au FileType yaml setl expandtab
 au FileType yaml setl number
 
+set nu
+nmap <F5> <ESC>:set nu! rnu!<CR>

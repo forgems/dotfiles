@@ -1,3 +1,4 @@
+set encoding=utf-8
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
@@ -16,26 +17,28 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'fatih/vim-go'
 Plugin 'Valloric/YouCompleteMe'
-Plugin 'https://github.com/alfredodeza/khuno.vim'
-Plugin 'http://github.com/jeetsukumaran/vim-buffergator'
-Plugin 'https://github.com/junegunn/fzf.vim'
-Plugin 'https://github.com/vim-airline/vim-airline'
-Plugin 'https://github.com/leafgarland/typescript-vim.git'
-Plugin 'https://github.com/rust-lang/rust.vim.git'
+Plugin 'alfredodeza/khuno.vim'
+Plugin 'jeetsukumaran/vim-buffergator'
+Plugin 'junegunn/fzf.vim'
+Plugin 'vim-airline/vim-airline'
+Plugin 'leafgarland/typescript-vim.git'
+Plugin 'rust-lang/rust.vim.git'
 Plugin 'posva/vim-vue'
 Plugin 'fisadev/vim-isort'
-Plugin 'https://github.com/marcelbeumer/spacedust.vim'
+Plugin 'marcelbeumer/spacedust.vim'
 
 Plugin 'joshdick/onedark.vim'
-Plugin 'https://github.com/Heorhiy/VisualStudioDark.vim'
-Plugin 'https://github.com/hzchirs/vim-material'
-Plugin 'https://github.com/dracula/vim.git'
+Plugin 'Heorhiy/VisualStudioDark.vim'
+Plugin 'hzchirs/vim-material'
+Plugin 'dracula/vim.git'
 Plugin 'KabbAmine/yowish.vim'
-Plugin 'https://github.com/rakr/vim-one'
-Plugin 'https://github.com/rakr/vim-colors-rakr'
+Plugin 'rakr/vim-one'
+Plugin 'rakr/vim-colors-rakr'
 Plugin 'jacoborus/tender.vim'
-Plugin 'https://github.com/morhetz/gruvbox'
+Plugin 'morhetz/gruvbox'
 Plugin 'crusoexia/vim-monokai'
+Plugin 'arcticicestudio/nord-vim'
+Plugin 'ayu-theme/ayu-vim'
 
 " " plugin from http://vim-scripts.org/vim/scripts.html
 " " Plugin 'L9'
@@ -95,7 +98,9 @@ let python_highligh_all=1
 "let g:rehash256=1
 set background=dark
 "colorscheme dracula
-colorscheme gruvbox
+"colorscheme gruvbox
+let ayucolor="dark"
+colorscheme ayu
 
 highlight NonText ctermfg=238
 highlight SpecialKey ctermfg=238
@@ -201,3 +206,5 @@ au FileType yaml setl number
 
 set nu
 nmap <F5> <ESC>:set nu! rnu!<CR>
+let g:airline_powerline_fonts = 1
+highlight Comment cterm=italic

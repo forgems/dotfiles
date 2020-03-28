@@ -2,43 +2,48 @@ set encoding=utf-8
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" " alternatively, pass a path where Vundle should install plugins
-" "call vundle#begin('~/some/path/here')
-"
-" " let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-"
 " " The following are examples of different formats supported.
-" " Keep Plugin commands between vundle#begin/end.
+" " Keep Plug commands between vundle#begin/end.
 " " plugin on GitHub repo
-Plugin 'tpope/vim-fugitive'
-Plugin 'fatih/vim-go'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'alfredodeza/khuno.vim'
-Plugin 'jeetsukumaran/vim-buffergator'
-Plugin 'junegunn/fzf.vim'
-Plugin 'vim-airline/vim-airline'
-Plugin 'leafgarland/typescript-vim.git'
-Plugin 'rust-lang/rust.vim.git'
-Plugin 'posva/vim-vue'
-Plugin 'fisadev/vim-isort'
-Plugin 'marcelbeumer/spacedust.vim'
+call plug#begin('~/.vim/plugged')
 
-Plugin 'joshdick/onedark.vim'
-Plugin 'Heorhiy/VisualStudioDark.vim'
-Plugin 'hzchirs/vim-material'
-Plugin 'dracula/vim.git'
-Plugin 'KabbAmine/yowish.vim'
-Plugin 'rakr/vim-one'
-Plugin 'rakr/vim-colors-rakr'
-Plugin 'jacoborus/tender.vim'
-Plugin 'morhetz/gruvbox'
-Plugin 'crusoexia/vim-monokai'
-Plugin 'arcticicestudio/nord-vim'
-Plugin 'ayu-theme/ayu-vim'
+Plug 'ap/vim-buftabline'
+Plug 'tpope/vim-fugitive'
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+Plug 'deoplete-plugins/deoplete-jedi'
+Plug 'fatih/vim-go'
+" Plug 'govim/govim'
+" Plug 'Valloric/YouCompleteMe'
+Plug 'alfredodeza/khuno.vim'
+Plug 'jeetsukumaran/vim-buffergator'
+Plug 'junegunn/fzf.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'leafgarland/typescript-vim'
+Plug 'rust-lang/rust.vim'
+Plug 'posva/vim-vue'
+Plug 'fisadev/vim-isort'
+Plug 'marcelbeumer/spacedust.vim'
+Plug 'mcchrish/nnn.vim'
+
+Plug 'joshdick/onedark.vim'
+Plug 'Heorhiy/VisualStudioDark.vim'
+Plug 'hzchirs/vim-material'
+Plug 'dracula/vim.git'
+Plug 'KabbAmine/yowish.vim'
+Plug 'rakr/vim-one'
+Plug 'rakr/vim-colors-rakr'
+Plug 'jacoborus/tender.vim'
+Plug 'morhetz/gruvbox'
+Plug 'crusoexia/vim-monokai'
+Plug 'arcticicestudio/nord-vim'
+Plug 'ayu-theme/ayu-vim'
+call plug#end()
 
 " " plugin from http://vim-scripts.org/vim/scripts.html
 " " Plugin 'L9'
@@ -54,7 +59,6 @@ Plugin 'ayu-theme/ayu-vim'
 " " Plugin 'ascenator/L9', {'name': 'newL9'}
 "
 " " All of your Plugins must be added before the following line
-call vundle#end()            " required
 filetype plugin indent on
 
 
@@ -99,7 +103,7 @@ let python_highligh_all=1
 set background=dark
 "colorscheme dracula
 "colorscheme gruvbox
-let ayucolor="dark"
+let ayucolor="mirage"
 colorscheme ayu
 
 highlight NonText ctermfg=238
@@ -208,3 +212,7 @@ set nu
 nmap <F5> <ESC>:set nu! rnu!<CR>
 let g:airline_powerline_fonts = 1
 highlight Comment cterm=italic
+let g:go_def_mode='gopls'
+let g:go_info_mode='gopls'
+let g:deoplete#enable_at_startup = 1
+call deoplete#custom#option('omni_patterns', { 'go': '[^. *\t]\.\w*' })

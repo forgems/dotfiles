@@ -5,21 +5,21 @@ filetype off                  " required
 " " The following are examples of different formats supported.
 " " Keep Plug commands between vundle#begin/end.
 " " plugin on GitHub repo
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 call plug#begin('~/.vim/plugged')
 
 Plug 'ap/vim-buftabline'
 Plug 'tpope/vim-fugitive'
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
+Plug 'roxma/vim-hug-neovim-rpc'
+Plug 'roxma/nvim-yarp'
+Plug 'Shougo/deoplete.nvim'
 Plug 'deoplete-plugins/deoplete-jedi'
 Plug 'fatih/vim-go'
-" Plug 'govim/govim'
-" Plug 'Valloric/YouCompleteMe'
 Plug 'alfredodeza/khuno.vim'
 Plug 'jeetsukumaran/vim-buffergator'
 Plug 'junegunn/fzf.vim'
@@ -106,7 +106,7 @@ set background=dark
 let ayucolor="mirage"
 colorscheme ayu
 
-highlight NonText ctermfg=238
+"highlight NonText ctermfg=238
 highlight SpecialKey ctermfg=238
 highlight BadWhitespace ctermbg=red guibg=red guibg=#ff8888
 highlight TrailingWhitespace ctermbg=red guibg=red
@@ -214,5 +214,15 @@ let g:airline_powerline_fonts = 1
 highlight Comment cterm=italic
 let g:go_def_mode='gopls'
 let g:go_info_mode='gopls'
+let g:go_auto_sameids=0
 let g:deoplete#enable_at_startup = 1
 call deoplete#custom#option('omni_patterns', { 'go': '[^. *\t]\.\w*' })
+
+function! SynStack()
+  if !exists("*synstack")
+    return
+  endif
+  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunc
+
+map <F10> call Synstack()

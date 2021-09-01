@@ -13,12 +13,12 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'ap/vim-buftabline'
+" Plug 'ap/vim-buftabline'
 Plug 'tpope/vim-fugitive'
 Plug 'roxma/vim-hug-neovim-rpc'
 Plug 'roxma/nvim-yarp'
-Plug 'Shougo/deoplete.nvim'
-Plug 'deoplete-plugins/deoplete-jedi'
+" Plug 'Shougo/deoplete.nvim'
+" Plug 'deoplete-plugins/deoplete-jedi'
 Plug 'fatih/vim-go'
 Plug 'alfredodeza/khuno.vim'
 Plug 'jeetsukumaran/vim-buffergator'
@@ -43,6 +43,11 @@ Plug 'morhetz/gruvbox'
 Plug 'crusoexia/vim-monokai'
 Plug 'arcticicestudio/nord-vim'
 Plug 'ayu-theme/ayu-vim'
+" Plug 'jasonccox/vim-wayland-clipboard'
+Plug 'vim-scripts/gnupg.vim'
+Plug 'ruanyl/vim-gh-line'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'plan9-for-vimspace/acme-colors'
 call plug#end()
 
 " " plugin from http://vim-scripts.org/vim/scripts.html
@@ -172,11 +177,7 @@ let g:fzf_layout = { 'up': '~30%' }
 let g:go_fmt_command = "goimports"
 
 " KEYBINDINGS
-imap <F3> <ESC>:NERDTreeToggle<CR>
-imap <F4> <ESC>:NERDTreeFind<CR>
 map <Down> gj
-map <F3> :NERDTreeToggle<CR>
-map <F4> :NERDTreeFind<CR>
 map <Up> gk
 " nnoremap gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nnoremap <leader>a :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
@@ -188,7 +189,6 @@ nnoremap <leader>l :bnext<CR>
 nnoremap <leader>r :Rg <C-R><C-W><CR>
 nnoremap <leader>t :enew<CR>
 nnoremap <leader>x <ESC>:Khuno show<CR>
-autocmd FileType go nmap <Leader>i <Plug>(go-info)
 nnoremap <s-tab> :bp<cr>
 nnoremap <tab> :bn<cr>
 vnoremap < <gv
@@ -200,6 +200,14 @@ au FileType go setl shiftwidth=4
 au FileType go setl textwidth=1000
 au FileType go setl number
 au FileType go setl nolist
+au FileType go nmap <Leader>i <Plug>(go-info)
+" ts
+au FileType ts,tsx setl tabstop=2
+au FileType ts,tsx setl shiftwidth=2
+au FileType ts,tsx setl et
+au FileType ts,tsx setl textwidth=1000
+au FileType ts,tsx setl number
+au FileType ts,tsx setl nolist
 
 " yaml
 au FileType yaml setl indentkeys-=<:>
@@ -208,15 +216,24 @@ au FileType yaml setl shiftwidth=2
 au FileType yaml setl expandtab
 au FileType yaml setl number
 
+au FileType proto setl indentkeys-=<:>
+au FileType proto setl tabstop=2
+au FileType proto setl shiftwidth=2
+au FileType proto setl expandtab
+au FileType proto setl number
+
 set nu
 nmap <F5> <ESC>:set nu! rnu!<CR>
 let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
 highlight Comment cterm=italic
 let g:go_def_mode='gopls'
+let g:go_auto_type_info = 1
 let g:go_info_mode='gopls'
 let g:go_auto_sameids=0
-let g:deoplete#enable_at_startup = 1
-call deoplete#custom#option('omni_patterns', { 'go': '[^. *\t]\.\w*' })
+let g:go_term_enabled=1
+" let g:deoplete#enable_at_startup = 1
+" call deoplete#custom#option('omni_patterns', { 'go': '[^. *\t]\.\w*' })
 
 function! SynStack()
   if !exists("*synstack")
@@ -226,3 +243,9 @@ function! SynStack()
 endfunc
 
 map <F10> call Synstack()
+
+function! ToggleAyu()
+	let g:ayucolor= g:ayucolor == "mirage" ? "light" : "mirage" | colorscheme ayu
+endfunc
+
+nn <F12> :call ToggleAyu()<CR>

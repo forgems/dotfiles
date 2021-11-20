@@ -30,7 +30,12 @@ Plug 'posva/vim-vue'
 Plug 'fisadev/vim-isort'
 Plug 'marcelbeumer/spacedust.vim'
 Plug 'mcchrish/nnn.vim'
+Plug 'vim-scripts/gnupg.vim'
+Plug 'ruanyl/vim-gh-line'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'plan9-for-vimspace/acme-colors'
 
+" themes
 Plug 'joshdick/onedark.vim'
 Plug 'Heorhiy/VisualStudioDark.vim'
 Plug 'hzchirs/vim-material'
@@ -44,10 +49,6 @@ Plug 'crusoexia/vim-monokai'
 Plug 'arcticicestudio/nord-vim'
 Plug 'ayu-theme/ayu-vim'
 " Plug 'jasonccox/vim-wayland-clipboard'
-Plug 'vim-scripts/gnupg.vim'
-Plug 'ruanyl/vim-gh-line'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'plan9-for-vimspace/acme-colors'
 call plug#end()
 
 " " plugin from http://vim-scripts.org/vim/scripts.html
@@ -93,10 +94,10 @@ set statusline=[%l,%c\ %P%M]\ %f\ %r%h%w
 set t_Co=256
 set tabstop=4
 set textwidth=0
+set wildmode=longest,list
 set wildmenu
-set wildmode=full
 set wrap
-set completeopt=menuone
+set completeopt=menuone,preview
 syntax on
 
 au BufRead,BufNewFile * set noet
@@ -151,7 +152,7 @@ command! -bang -nargs=* Rg
       \   <bang>0)
 
 match ErrorMsg '\s\+$'
-set mouse=a
+set mouse=nv
 set ttymouse=sgr
 set ttyfast
 
@@ -168,6 +169,12 @@ endif
 let &t_8u = "\<Esc>[58;2;%lu;%lu;%lum"
 let &t_Cs = "\e[4:3m"
 let &t_Ce = "\e[4:0m"
+" vim hardcodes background color erase even if the terminfo file does
+" not contain bce (not to mention that libvte based terminals
+" incorrectly contain bce in their terminfo files). This causes
+" incorrect background rendering when using a color theme with a
+" background color.
+let &t_ut=''
 
 if (has('termguicolors'))
   set termguicolors
@@ -189,6 +196,8 @@ nnoremap <leader>l :bnext<CR>
 nnoremap <leader>r :Rg <C-R><C-W><CR>
 nnoremap <leader>t :enew<CR>
 nnoremap <leader>x <ESC>:Khuno show<CR>
+nnoremap <leader>c :GoCallers<CR>
+nnoremap <leader>i :GoImplements<CR>
 nnoremap <s-tab> :bp<cr>
 nnoremap <tab> :bn<cr>
 vnoremap < <gv
@@ -210,17 +219,19 @@ au FileType ts,tsx setl number
 au FileType ts,tsx setl nolist
 
 " yaml
-au FileType yaml setl indentkeys-=<:>
-au FileType yaml setl tabstop=2
-au FileType yaml setl shiftwidth=2
-au FileType yaml setl expandtab
-au FileType yaml setl number
+au FileType yaml set indentkeys-=<:>
+au FileType yaml set tabstop=2
+au FileType yaml set shiftwidth=2
+au FileType yaml set expandtab
+au FileType yaml set number
+au FileType yaml set list
 
-au FileType proto setl indentkeys-=<:>
-au FileType proto setl tabstop=2
-au FileType proto setl shiftwidth=2
-au FileType proto setl expandtab
-au FileType proto setl number
+au FileType proto set indentkeys-=<:>
+au FileType proto set tabstop=4
+au FileType proto set shiftwidth=4
+au FileType proto set expandtab
+au FileType proto set number
+au FileType proto set list
 
 set nu
 nmap <F5> <ESC>:set nu! rnu!<CR>
@@ -228,10 +239,12 @@ let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 highlight Comment cterm=italic
 let g:go_def_mode='gopls'
-let g:go_auto_type_info = 1
+let g:go_doc_popup_window=1
+let g:go_auto_type_info=1
 let g:go_info_mode='gopls'
 let g:go_auto_sameids=0
 let g:go_term_enabled=1
+let g:go_highlight_string_spellcheck=1
 " let g:deoplete#enable_at_startup = 1
 " call deoplete#custom#option('omni_patterns', { 'go': '[^. *\t]\.\w*' })
 
@@ -249,3 +262,5 @@ function! ToggleAyu()
 endfunc
 
 nn <F12> :call ToggleAyu()<CR>
+iab iferr <ESC>:GoIfErr<CR>
+

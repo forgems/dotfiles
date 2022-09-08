@@ -48,6 +48,8 @@ Plug 'morhetz/gruvbox'
 Plug 'crusoexia/vim-monokai'
 Plug 'arcticicestudio/nord-vim'
 Plug 'ayu-theme/ayu-vim'
+Plug 'sainnhe/sonokai'
+Plug 'NLKNguyen/papercolor-theme'
 " Plug 'jasonccox/vim-wayland-clipboard'
 call plug#end()
 
@@ -97,7 +99,11 @@ set textwidth=0
 set wildmode=longest,list
 set wildmenu
 set wrap
-set completeopt=menuone,preview
+
+set complete+=kspell " Add spellchecker
+set completeopt=menuone,preview,longest
+set shortmess+=c "don't show completion status in statusline
+
 syntax on
 
 au BufRead,BufNewFile * set noet
@@ -132,11 +138,6 @@ au ColorScheme * highlight default TrailingWhitespace ctermbg=red guibg=red
 au ColorScheme * highlight default BadWhitespace ctermbg=red guibg=red
 set hidden
 
-let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck', 'misspell', 'vetshadow', 'gotype', 'megacheck', 'goconst', 'ineffassign', 'staticcheck', 'gocyclo', 'gosec']
-let g:go_list_type = "quickfix"
-let g:go_auto_type_info = 1
-let g:go_auto_sameids = 1
-let g:go_def_mode='gopls'
 set rtp+=~/.fzf
 set nobackup
 set noswapfile
@@ -179,9 +180,6 @@ let &t_ut=''
 if (has('termguicolors'))
   set termguicolors
 endif
-let g:go_fmt_command = "goimports"
-let g:fzf_layout = { 'up': '~30%' }
-let g:go_fmt_command = "goimports"
 
 " KEYBINDINGS
 map <Down> gj
@@ -238,13 +236,18 @@ nmap <F5> <ESC>:set nu! rnu!<CR>
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 highlight Comment cterm=italic
+let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck', 'misspell', 'vetshadow', 'gotype', 'megacheck', 'goconst', 'ineffassign', 'staticcheck', 'gocyclo', 'gosec']
+let g:go_list_type = "quickfix"
+" let g:go_auto_sameids = 1
 let g:go_def_mode='gopls'
 let g:go_doc_popup_window=1
 let g:go_auto_type_info=1
 let g:go_info_mode='gopls'
-let g:go_auto_sameids=0
 let g:go_term_enabled=1
 let g:go_highlight_string_spellcheck=1
+let g:go_metalinter_autosave = 1
+let g:go_fmt_command = "goimports"
+let g:fzf_layout = { 'up': '~30%' }
 " let g:deoplete#enable_at_startup = 1
 " call deoplete#custom#option('omni_patterns', { 'go': '[^. *\t]\.\w*' })
 

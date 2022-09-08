@@ -7,11 +7,14 @@
 	type = cat-file -t
 	dump = cat-file -p
 [user]
-	email = marcin.swiderski@gmail.com
+	email = forgems@gmail.com
 	name = Marcin Swiderski
+	signingkey = FFA85E6C14A0F7C2
 [push]
 	default = simple
+	autoSetupRemote = true
 [commit]
+	gpgsign = true
 	#template = ~/.gitmessage
 [pull]
 	rebase = true
@@ -22,3 +25,9 @@
 	required = true
 [core]
 	quotepath = false
+
+[url "git@github.com:arangodb-managed/"]
+	insteadOf = https://github.com/arangodb-managed/
+
+[tag]
+    forceSignAnnotated = true

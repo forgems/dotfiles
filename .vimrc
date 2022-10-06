@@ -267,3 +267,6 @@ endfunc
 nn <F12> :call ToggleAyu()<CR>
 iab iferr <ESC>:GoIfErr<CR>
 
+" Disable Coc by default
+" To enable use CocStart and CocEnable
+let g:coc_start_at_startup=0
